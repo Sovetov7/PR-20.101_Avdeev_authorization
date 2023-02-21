@@ -16,6 +16,15 @@ namespace PR_20._101_Avdeev_authorization.Baza
     public partial class Entities : DbContext
     {
         private static Entities context;
+        public static Entities GetContext()
+        {
+            if (context == null)
+            {
+                context = new Entities();
+            }
+
+            return context;
+        }
         public Entities()
             : base("name=Entities")
         {
@@ -25,16 +34,10 @@ namespace PR_20._101_Avdeev_authorization.Baza
         {
             throw new UnintentionalCodeFirstException();
         }
-        
-        public static Entities GetContext()
-        {
-            if (context == null)
-            {
-                context = new Entities();
-            }
-            return context;
-        }
+    
         public virtual DbSet<Role> Role { get; set; }
+
+
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
     }
